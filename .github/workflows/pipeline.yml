@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install dependencies
-        run: pip install -r tourism_project/requirements.txt
+        run: pip install -r tourism_project/deployment/requirements.txt
       - name: Upload dataset to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install dependencies
-        run: pip install -r tourism_project/requirements.txt
+        run: pip install -r tourism_project/deployment/requirements.txt
       - name: Run data preparation
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install dependencies
-        run: pip install -r tourism_project/requirements.txt
+        run: pip install -r tourism_project/deployment/requirements.txt
       - name: Start MLflow server
         run: |
           nohup mlflow ui --host 0.0.0.0 --port 5000 --gunicorn-opts "--timeout 900 --graceful-timeout 120" &
@@ -56,7 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install dependencies
-        run: pip install -r tourism_project/requirements.txt
+        run: pip install -r tourism_project/deployment/requirements.txt
       - name: Push files to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
