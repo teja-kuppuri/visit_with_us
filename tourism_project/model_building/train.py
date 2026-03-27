@@ -138,4 +138,4 @@ api.upload_file(
     repo_id=HF_MODEL_REPO,
     repo_type="model",
 )
-print("Best model uploaded to Hugging Face Model Hub.")
+print("Best model uploaded to Hugging Face Model Hub")
