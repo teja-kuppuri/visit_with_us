@@ -7,7 +7,7 @@ SPACE_REPO = "treddy333/visit-with-us-prediction"
 
 api = HfApi(token=os.getenv("HF_TOKEN"))
 api.upload_folder(
-    folder_path="tourism_project/deployment",
+    folder_path="/Users/treddy/Documents/ML/Project_submissions/tourism_project/deployment",
     repo_id=SPACE_REPO,
     repo_type="space",
     path_in_repo="",

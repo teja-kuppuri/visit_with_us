@@ -10,8 +10,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from huggingface_hub import HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError
+from huggingface_hub import hf_hub_download
 
-HF_DATASET_REPO = "treddy333/tourism-wellness-dataset"
+HF_DATASET_REPO = "treddy333/visit-with-us-predict"
 HF_MODEL_REPO = "treddy333/tourism-wellness-model"
 
 tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
@@ -20,10 +21,14 @@ mlflow.set_experiment("tourism-mlops-training-experiment")
 
 api = HfApi(token=os.getenv("HF_TOKEN"))
 
-Xtrain = pd.read_csv(f"hf://datasets/{HF_DATASET_REPO}/Xtrain.csv")
-Xtest = pd.read_csv(f"hf://datasets/{HF_DATASET_REPO}/Xtest.csv")
-ytrain = pd.read_csv(f"hf://datasets/{HF_DATASET_REPO}/ytrain.csv").squeeze("columns")
-ytest = pd.read_csv(f"hf://datasets/{HF_DATASET_REPO}/ytest.csv").squeeze("columns")
+def load_csv(repo, filename):
+    path = hf_hub_download(repo_id=repo, filename=filename, repo_type="dataset")
+    return pd.read_csv(path)
+
+Xtrain = load_csv(HF_DATASET_REPO, "Xtrain.csv")
+Xtest = load_csv(HF_DATASET_REPO, "Xtest.csv")
+ytrain = load_csv(HF_DATASET_REPO, "ytrain.csv").squeeze("columns")
+ytest = load_csv(HF_DATASET_REPO, "ytest.csv").squeeze("columns")
 
 numeric_features = [
     "Age",
