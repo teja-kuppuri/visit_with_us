@@ -1,4 +1,4 @@
-name: Tourism Project Pipeline
+name: Tourism Project Pipelines
 
 on:
   push:
